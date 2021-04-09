@@ -47,8 +47,7 @@ input.addEventListener("keypress", function (event){
         document.getElementById("enter").click();
     }
 /*        keyCode         */
-// console.log(event.key);
-// console.log(event.keyCode)
+
 if (event.keyCode === 13){
 }
 });
