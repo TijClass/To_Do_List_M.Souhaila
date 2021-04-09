@@ -1,52 +1,65 @@
-
 var button = document.getElementById("enter");
 var input = document.getElementById("userinput");
 const ul = document.querySelector("ul");
 const li = document.getElementsByTagName("li");
 
-/*  For now the i element is not there we will create it */
-const deleteButton = document.getElementsByTagName("i");
-
-var clearButton = document.getElementById("clear");
-
-console.log(button);
-console.log(input);
-console.log(ul);
-console.log(li);
-console.log(deleteButton);
-console.log(clearButton);
-
-/* Functions code here */
-/*        Create a function called inputLength          */
-
-function inputLength(){
-
-    return input.value.length;
+var userinput = document.getElementById("userinput");
+function inputValue(inp) {
+    return inp.value.length;
 }
-button.addEventListener('click', e=> {
-    e.preventDefault();
-    console.log(inputLength(input));
-
-});
-
-/*       Create a function called createListElement          */
-
-function createListElement(value){
-    if (inputLength(input) == ""){
-    } 
+function createElement() {
+    if (inputValue(userinput) == 0){
+        alert ("box empty")
+    }
     else {
-        const wrapper = document.createElement("div");
-        wrapper.classList.add("li-wrapper")
-        const li = document.createElement('li');
-        const text = document.createTextNode(input.value)
-        li.append(text)
-        wrapper.appendChild(li)
-        ul.append(wrapper)
+        var ulItem = document.getElementById("ul");
+        var divItem = document.createElement("div");
+        divItem.classList.add("li-wrapper");
+        ulItem.append(divItem);
+        var liItem = document.createElement('li');
+        divItem.append(liItem);
+        var inputLi = document.createTextNode(userinput.value);
+        liItem.appendChild(inputLi)
+        var divItem2 = document.createElement("div");
+        divItem.append(divItem2);
+        var iconItem = document.createElement("i");
+        divItem2.append(iconItem);
+        iconItem.classList.add("fas");
+        iconItem.classList.add("fa-backspace");
+        iconItem.addEventListener('click', deleteElement);
+        console.log(inputValue(userinput));
+        userinput.value = ""; 
+
     }
 }
+function deleteElement(e){
+        var item = e.target;
+        item.parentElement.parentElement.remove();
+}
 
+var button = document.getElementById("enter");
+button.addEventListener('click', createElement);
 
-
+/*        keypress enter         */
+input.addEventListener("keypress", function (event){
+    if (event.keyCode === 13) {
+        event.preventDefault();
+        document.getElementById("enter").click();
+    }
+/*        keyCode         */
+// console.log(event.key);
+// console.log(event.keyCode)
+if (event.keyCode === 13){
+}
+});
+var clear = document.getElementById("clear");
+clear.addEventListener('click', clearList);
+function clearList(){
+    var List = document.querySelectorAll(".li-wrapper");
+    List.forEach(element => {
+        element.remove();
+    });
+}
 /*        Fin           */
 
 // clearButton.addEventListener("click", clearList);
